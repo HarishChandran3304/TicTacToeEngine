@@ -25,3 +25,22 @@ def get_actions(board):
 
     return actions
 
+def result(board, action):
+    return board[action[0], action[1]] = get_turn(board)
+
+def minimax(board):
+    if is_terminal(board):
+        return get_score(board)
+
+    if get_turn(board) == "O":
+        score = float("-inf")
+        for action in get_actions(board):
+            score = max(score, minimax(result(board, action)))
+        return score
+
+    if get_turn(board) == "X":
+        score = float("inf")
+        for action in get_actions(board):
+            score = min(score, minimax(result(board, action)))
+        return score
+
