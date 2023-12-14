@@ -37,6 +37,11 @@ def check_win(board):
     
     return None
 
+def check_draw(board):
+    if all([all(row) for row in board]):
+        return True
+    return False
+
 winner = None
 turns = ["X", "O"]
 print_board(board)
@@ -48,7 +53,7 @@ for i in range(9):
     if winner := check_win(board):
         print(f'{winner} wins!')
         break
-
-    if all([all(board[i]) for i in range(3)]):
+    
+    if check_draw(board):
         print("Draw!")
         break
