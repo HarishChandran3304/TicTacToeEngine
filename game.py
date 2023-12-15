@@ -1,5 +1,3 @@
-board = [[None for _ in range(3)] for _ in range(3)]
-
 def print_board(board):
     for row in board:
         print(row)
@@ -42,18 +40,3 @@ def check_draw(board):
         return True
     return False
 
-winner = None
-turns = ["X", "O"]
-print_board(board)
-for i in range(9):
-    row, col = map(int, input().split())
-    board[row][col] = turns[i%2]
-    print_board(board)
-
-    if winner := check_win(board):
-        print(f'{winner} wins!')
-        break
-    
-    if check_draw(board):
-        print("Draw!")
-        break

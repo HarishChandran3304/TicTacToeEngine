@@ -1,20 +1,20 @@
-from game import check_winner, check_draw
+from game import check_win, check_draw
 
 def is_terminal(board):
-    return True if check_winner(board) or check_draw(board) else False
+    return True if check_win(board) or check_draw(board) else False
 
 def get_score(board):
-    if check_winner(board) == "O":
+    if check_win(board) == "O":
         return 1
 
-    if check_winner(board) == "X":
+    if check_win(board) == "X":
         return -1
     
     if check_draw(board):
         return 0
 
 def get_turn(board):
-    return "O" if sum([row.count("X") for row in board]) > sum([row.count("O") for row in board])
+    return "O" if sum([row.count("X") for row in board]) > sum([row.count("O") for row in board]) else "X"
 
 def get_actions(board):
     actions = []
@@ -26,7 +26,8 @@ def get_actions(board):
     return actions
 
 def result(board, action):
-    return board[action[0], action[1]] = get_turn(board)
+    board[action[0]][action[1]] = get_turn(board)
+    return board
 
 def minimax(board):
     if is_terminal(board):
