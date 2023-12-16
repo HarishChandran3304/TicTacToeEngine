@@ -1,3 +1,4 @@
+from copy import deepcopy
 from game import check_win, check_draw
 
 def is_terminal(board):
@@ -26,6 +27,7 @@ def get_actions(board):
     return actions
 
 def result(board, action):
+    board = deepcopy(board)
     board[action[0]][action[1]] = get_turn(board)
     return board
 

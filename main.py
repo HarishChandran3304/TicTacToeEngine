@@ -11,15 +11,14 @@ def main():
         turn = get_turn(board)
         if turn == "X":
             row, col = map(int, input().split())
-            board[row][col] = "X"
+            board[row-1][col-1] = "X"
 
         else:
             actions = get_actions(board)
             scores = []
             for action in actions:
                 scores.append(minimax(result(board, action)))
-            
-            row, col = actions[scores[scores.index(max(scores))]]
+            row, col = actions[scores.index(max(scores))]
             board[row][col] = "O" 
 
         print_board(board)
