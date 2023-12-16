@@ -4,12 +4,12 @@ from game import check_win, check_draw
 def is_terminal(board):
     return True if check_win(board) or check_draw(board) else False
 
-def get_score(board):
+def get_score(board, moves):
     if check_win(board) == "O":
-        return 1
+        return 1/moves
 
     if check_win(board) == "X":
-        return -1
+        return -1*moves
     
     if check_draw(board):
         return 0
@@ -31,19 +31,19 @@ def result(board, action):
     board[action[0]][action[1]] = get_turn(board)
     return board
 
-def minimax(board):
+def minimax(board, moves):
     if is_terminal(board):
-        return get_score(board)
+        return get_score(board, moves)
 
     if get_turn(board) == "O":
         score = float("-inf")
         for action in get_actions(board):
-            score = max(score, minimax(result(board, action)))
+            score = max(score, minimax(result(board, action), moves+1))
         return score
 
     if get_turn(board) == "X":
         score = float("inf")
         for action in get_actions(board):
-            score = min(score, minimax(result(board, action)))
+            score = min(score, minimax(result(board, action), moves+1))
         return score
 

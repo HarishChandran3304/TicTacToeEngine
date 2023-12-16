@@ -10,17 +10,17 @@ def main():
     for i in range(9):
         turn = get_turn(board)
         if turn == "X":
-            row, col = map(int, input().split())
+            row, col = map(int, input("Your turn: ").split())
             board[row-1][col-1] = "X"
 
         else:
             actions = get_actions(board)
             scores = []
             for action in actions:
-                scores.append(minimax(result(board, action)))
+                scores.append(minimax(result(board, action), 1))
             row, col = actions[scores.index(max(scores))]
             board[row][col] = "O" 
-
+            print(f'AI plays: {row+1} {col+1}')
         print_board(board)
 
         if winner := check_win(board):

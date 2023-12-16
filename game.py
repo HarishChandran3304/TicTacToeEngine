@@ -1,6 +1,9 @@
 def print_board(board):
     for row in board:
-        print(row)
+        print("|", end="")
+        for char in row:
+            print(f' {char if char else " "} |', end="")
+        print()
     print()
 
 def check_rows(board):
