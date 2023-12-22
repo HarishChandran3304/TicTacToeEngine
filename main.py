@@ -1,5 +1,5 @@
 from game import print_board, check_win, check_draw
-from minimax import get_turn, get_actions, result, get_score, minimax
+from pruning import get_turn, get_actions, result, get_score, minimaxABP
 
 
 def main():
@@ -17,10 +17,10 @@ def main():
             actions = get_actions(board)
             scores = []
             for action in actions:
-                scores.append(minimax(result(board, action), 1))
+                scores.append(minimaxABP(result(board, action), 1, float("-inf"), float("+inf")))
             row, col = actions[scores.index(max(scores))]
             board[row][col] = "O" 
-            print(f'AI plays: {row+1} {col+1}')
+            print(f'Engine plays: {row+1} {col+1}')
         print_board(board)
 
         if winner := check_win(board):
